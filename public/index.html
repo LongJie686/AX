@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Monitor - Twitter KOL 实时监控 & 飞书电话提醒</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/landing.css">
+</head>
+<body>
+    <!-- 导航 -->
+    <nav class="navbar">
+        <a href="/" class="navbar-brand"><span class="dot"></span> Web3 Monitor</a>
+        <div class="navbar-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="/pricing.html">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+            <a href="/login.html" class="btn btn-sm btn-secondary">Sign In</a>
+            <a href="/login.html?tab=register" class="btn btn-sm btn-primary">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="hero-badge">Real-time Twitter Monitoring</div>
+            <h1 class="hero-title">
+                Twitter KOL <span class="gradient-text">Real-time Monitoring</span><br>
+                Never Miss a Signal Again
+            </h1>
+            <p class="hero-subtitle">
+                Track key Web3 opinion leaders 24/7. Auto-translate tweets, push to Feishu instantly,
+                and wake you up with phone calls for urgent alpha.
+            </p>
+            <div class="hero-actions">
+                <a href="/login.html?tab=register" class="btn btn-lg btn-primary">Start Monitoring Free</a>
+                <a href="#how-it-works" class="btn btn-lg btn-secondary">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-value">5min</span><span class="stat-label">Polling Interval</span></div>
+                <div class="stat"><span class="stat-value">24/7</span><span class="stat-label">Auto Monitoring</span></div>
+                <div class="stat"><span class="stat-value">&lt;10s</span><span class="stat-label">Alert Speed</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Core Features</h2>
+            <p class="section-subtitle">Everything you need to stay ahead in the Web3 information war</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#x1F50D;</div>
+                    <h3>Real-time Monitoring</h3>
+                    <p>Poll target Twitter accounts every 5 minutes. Detect new tweets, retweets, replies, and quote tweets instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#x1F310;</div>
+                    <h3>Auto Translation</h3>
+                    <p>Automatically translate English tweets to Chinese. No more language barriers for alpha hunting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#x1F4F1;</div>
+                    <h3>Feishu Push</h3>
+                    <p>Beautiful card notifications sent to your Feishu group via Webhook. Rich formatting with original text, translation, and metrics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#x260E;</div>
+                    <h3>Phone Call Alert</h3>
+                    <p>Urgent tweets trigger Feishu phone calls. Smart retry until you read the message. Never miss critical alpha while sleeping.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#x1F4CA;</div>
+                    <h3>Dashboard</h3>
+                    <p>Clean dashboard to manage monitored accounts, view tweet history, configure notification preferences, and track statistics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#x26A1;</div>
+                    <h3>Priority Levels</h3>
+                    <p>Set Normal / Important / Urgent priority per account. Only urgent accounts trigger phone calls. Fine-grained control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Three simple steps to never miss alpha again</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Add Accounts</h3>
+                    <p>Enter the Twitter username of KOLs you want to monitor. Set priority level for each account.</p>
+                </div>
+                <div class="step-arrow">&rarr;</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Configure Alerts</h3>
+                    <p>Set up your Feishu Webhook URL and phone call preferences. Customize retry intervals.</p>
+                </div>
+                <div class="step-arrow">&rarr;</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Sleep Peacefully</h3>
+                    <p>The system monitors 24/7. When a tweet drops, you get instant notification or a wake-up call.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container text-center">
+            <h2 class="section-title">Ready to Never Miss Alpha?</h2>
+            <p class="section-subtitle">Start monitoring Twitter KOLs in under 2 minutes. Free forever for basic use.</p>
+            <a href="/login.html?tab=register" class="btn btn-lg btn-primary mt-3">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><span class="dot"></span> Web3 Monitor</div>
+                <div class="footer-links">
+                    <a href="/pricing.html">Pricing</a>
+                    <a href="/dashboard.html">Dashboard</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 Web3 Monitor. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>updateNavAuth();</script>
+</body>
+</html>

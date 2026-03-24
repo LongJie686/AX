@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Web3 Monitor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand"><span class="dot"></span> Web3 Monitor</a>
+        <div class="navbar-links"></div>
+        <div class="navbar-actions"></div>
+    </nav>
+
+    <div class="dashboard">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <button class="sidebar-item active" data-panel="overview"><span class="sidebar-icon">&#9636;</span> Overview</button>
+                <button class="sidebar-item" data-panel="monitors"><span class="sidebar-icon">&#9673;</span> Monitors</button>
+                <button class="sidebar-item" data-panel="tweets"><span class="sidebar-icon">&#9993;</span> Tweets</button>
+                <button class="sidebar-item" data-panel="settings"><span class="sidebar-icon">&#9881;</span> Settings</button>
+            </nav>
+        </aside>
+
+        <!-- 主内容 -->
+        <main class="main-content">
+
+            <!-- === 概览面板 === -->
+            <div id="panel-overview" class="panel active">
+                <h2 class="panel-title">Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-card-label">Active Monitors</div><div class="stat-card-value blue" id="stat-active">0</div></div>
+                    <div class="stat-card"><div class="stat-card-label">Total Monitors</div><div class="stat-card-value" id="stat-monitors">0</div></div>
+                    <div class="stat-card"><div class="stat-card-label">Tweets Today</div><div class="stat-card-value green" id="stat-today">0</div></div>
+                    <div class="stat-card"><div class="stat-card-label">Total Tweets</div><div class="stat-card-value yellow" id="stat-total">0</div></div>
+                </div>
+                <h3 style="font-size:16px;font-weight:600;margin-bottom:16px">Recent Tweets</h3>
+                <div id="recent-tweets" class="tweet-list">
+                    <div class="empty-state"><div class="empty-state-icon">&#9993;</div><p class="empty-state-text">No tweets yet. Add monitors to start tracking.</p></div>
+                </div>
+            </div>
+
+            <!-- === 监控面板 === -->
+            <div id="panel-monitors" class="panel">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+                    <h2 class="panel-title" style="margin-bottom:0">Monitors</h2>
+                    <button class="btn btn-primary" onclick="openAddModal()">+ Add Monitor</button>
+                </div>
+                <div id="monitor-list" class="monitor-grid">
+                    <div class="empty-state"><div class="empty-state-icon">&#9673;</div><p class="empty-state-text">No monitors yet.</p><button class="btn btn-primary" onclick="openAddModal()">Add Your First Monitor</button></div>
+                </div>
+            </div>
+
+            <!-- === 推文面板 === -->
+            <div id="panel-tweets" class="panel">
+                <h2 class="panel-title">Tweet History</h2>
+                <div style="display:flex;gap:12px;margin-bottom:20px">
+                    <select id="tweet-filter-monitor" class="form-input" style="width:200px"><option value="">All Monitors</option></select>
+                </div>
+                <div id="tweet-list" class="tweet-list">
+                    <div class="empty-state"><div class="empty-state-icon">&#9993;</div><p class="empty-state-text">No tweets found.</p></div>
+                </div>
+                <div id="tweet-pagination" class="pagination"></div>
+            </div>
+
+            <!-- === 设置面板 === -->
+            <div id="panel-settings" class="panel">
+                <h2 class="panel-title">Notification Settings</h2>
+                <form id="settingsForm" class="settings-form">
+                    <div class="settings-section">
+                        <h3>Feishu Webhook</h3>
+                        <div class="form-group">
+                            <label class="form-label">Webhook URL</label>
+                            <input type="url" class="form-input" name="feishu_webhook_url" placeholder="https://open.feishu.cn/open-apis/bot/v2/hook/xxx">
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Phone Call Alert</h3>
+                        <div class="settings-row">
+                            <div><div class="settings-row-label">Enable Phone Alerts</div><div class="settings-row-desc">Call you when urgent accounts tweet</div></div>
+                            <label class="toggle"><input type="checkbox" name="phone_enabled"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Feishu User ID (Open ID)</label>
+                            <input type="text" class="form-input" name="feishu_user_id" placeholder="ou_xxxxxxxxxx">
+                        </div>
+                        <div style="display:flex;gap:16px">
+                            <div class="form-group" style="flex:1">
+                                <label class="form-label">Max Retries</label>
+                                <input type="number" class="form-input" name="phone_retry_max" value="3" min="1" max="10">
+                            </div>
+                            <div class="form-group" style="flex:1">
+                                <label class="form-label">Retry Interval (sec)</label>
+                                <input type="number" class="form-input" name="phone_retry_interval" value="120" min="30" max="600">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Polling</h3>
+                        <div class="form-group">
+                            <label class="form-label">Poll Interval (sec)</label>
+                            <input type="number" class="form-input" name="poll_interval" value="300" min="60" max="3600">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 添加监控弹窗 -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal">
+            <h3>Add Monitor</h3>
+            <form id="addMonitorForm">
+                <div class="form-group">
+                    <label class="form-label">Twitter Username</label>
+                    <input type="text" class="form-input" name="twitter_username" placeholder="e.g. sama, elonmusk" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-input" name="priority">
+                        <option value="normal">Normal - Webhook only</option>
+                        <option value="important">Important - Webhook + highlight</option>
+                        <option value="urgent">Urgent - Webhook + Phone Call</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

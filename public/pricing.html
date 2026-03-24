@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Web3 Monitor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/pricing.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand"><span class="dot"></span> Web3 Monitor</a>
+        <div class="navbar-links">
+            <a href="/">Home</a>
+            <a href="/#features">Features</a>
+            <a href="/pricing.html">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+            <a href="/login.html" class="btn btn-sm btn-secondary">Sign In</a>
+            <a href="/login.html?tab=register" class="btn btn-sm btn-primary">Get Started</a>
+        </div>
+    </nav>
+
+    <section class="pricing-hero">
+        <div class="container text-center">
+            <h1 class="pricing-title">Simple, Transparent Pricing</h1>
+            <p class="pricing-subtitle">Start free. Upgrade when you need more power.</p>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-grid">
+
+                <!-- Free -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-plan">Free</div>
+                        <div class="pricing-price"><span class="price-amount">$0</span><span class="price-period">/month</span></div>
+                        <div class="pricing-desc">Perfect for getting started</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">&#x2713;</span> 3 monitored accounts</li>
+                        <li><span class="check">&#x2713;</span> Feishu Webhook alerts</li>
+                        <li><span class="check">&#x2713;</span> 15-minute polling</li>
+                        <li><span class="check">&#x2713;</span> 7-day tweet history</li>
+                        <li class="disabled"><span class="x">&#x2717;</span> Phone call alerts</li>
+                        <li class="disabled"><span class="x">&#x2717;</span> Auto translation</li>
+                        <li class="disabled"><span class="x">&#x2717;</span> Email notifications</li>
+                    </ul>
+                    <a href="/login.html?tab=register" class="btn btn-secondary" style="width:100%">Get Started Free</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-card-header">
+                        <div class="pricing-plan">Pro</div>
+                        <div class="pricing-price"><span class="price-amount">$19</span><span class="price-period">/month</span></div>
+                        <div class="pricing-desc">For serious alpha hunters</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">&#x2713;</span> 20 monitored accounts</li>
+                        <li><span class="check">&#x2713;</span> Feishu Webhook alerts</li>
+                        <li><span class="check">&#x2713;</span> 5-minute polling</li>
+                        <li><span class="check">&#x2713;</span> 30-day tweet history</li>
+                        <li><span class="check">&#x2713;</span> Phone call alerts</li>
+                        <li><span class="check">&#x2713;</span> Auto translation</li>
+                        <li><span class="check">&#x2713;</span> Email notifications</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width:100%" onclick="handleUpgrade('pro')">Upgrade to Pro</button>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-plan">Enterprise</div>
+                        <div class="pricing-price"><span class="price-amount">$99</span><span class="price-period">/month</span></div>
+                        <div class="pricing-desc">For teams and power users</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">&#x2713;</span> Unlimited accounts</li>
+                        <li><span class="check">&#x2713;</span> All notification channels</li>
+                        <li><span class="check">&#x2713;</span> 1-minute polling</li>
+                        <li><span class="check">&#x2713;</span> Unlimited history</li>
+                        <li><span class="check">&#x2713;</span> Phone call alerts</li>
+                        <li><span class="check">&#x2713;</span> Auto translation + Summary</li>
+                        <li><span class="check">&#x2713;</span> API access</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width:100%" onclick="handleUpgrade('enterprise')">Contact Sales</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" style="padding-bottom:80px">
+        <div class="container" style="max-width:700px">
+            <h2 class="section-title" style="font-size:28px;margin-bottom:32px">FAQ</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h4>Can I switch plans later?</h4>
+                    <p>Yes, you can upgrade or downgrade at any time. Changes take effect immediately.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is there a free trial for Pro?</h4>
+                    <p>The Free plan is available forever. You can try all Pro features with a 14-day free trial.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What payment methods do you accept?</h4>
+                    <p>We accept credit cards (Visa, Mastercard), WeChat Pay, and Alipay.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How does the phone call alert work?</h4>
+                    <p>When an urgent account tweets, we send a Feishu message and trigger a phone call via Feishu. If you don't read the message, we retry automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><span class="dot"></span> Web3 Monitor</div>
+                <div class="footer-copy">&copy; 2026 Web3 Monitor. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 支付弹窗 -->
+    <div id="payModal" class="modal-overlay">
+        <div class="modal" style="text-align:center">
+            <h3 id="payTitle">Upgrade to Pro</h3>
+            <div class="pay-amount" id="payAmount">$19/month</div>
+            <div style="margin:24px 0">
+                <div class="pay-methods">
+                    <button class="pay-method active" data-method="card">Credit Card</button>
+                    <button class="pay-method" data-method="wechat">WeChat Pay</button>
+                    <button class="pay-method" data-method="alipay">Alipay</button>
+                </div>
+            </div>
+            <div id="payForm">
+                <div class="form-group"><input type="text" class="form-input" placeholder="Card Number" value="4242 4242 4242 4242"></div>
+                <div style="display:flex;gap:12px">
+                    <div class="form-group" style="flex:1"><input type="text" class="form-input" placeholder="MM/YY" value="12/28"></div>
+                    <div class="form-group" style="flex:1"><input type="text" class="form-input" placeholder="CVC" value="123"></div>
+                </div>
+            </div>
+            <div id="payQR" style="display:none;padding:20px">
+                <div style="width:200px;height:200px;margin:0 auto;background:var(--bg-input);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-muted)">QR Code</div>
+                <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">Scan with WeChat/Alipay to pay</p>
+            </div>
+            <div class="modal-actions" style="justify-content:center">
+                <button class="btn btn-secondary" onclick="closePayModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="processPayment()">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+        updateNavAuth();
+
+        function handleUpgrade(plan) {
+            const titles = { pro: 'Upgrade to Pro', enterprise: 'Upgrade to Enterprise' };
+            const amounts = { pro: '$19/month', enterprise: '$99/month' };
+            document.getElementById('payTitle').textContent = titles[plan];
+            document.getElementById('payAmount').textContent = amounts[plan];
+            document.getElementById('payModal').classList.add('show');
+        }
+
+        function closePayModal() { document.getElementById('payModal').classList.remove('show'); }
+
+        // 支付方式切换
+        document.querySelectorAll('.pay-method').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const isCard = btn.dataset.method === 'card';
+                document.getElementById('payForm').style.display = isCard ? 'block' : 'none';
+                document.getElementById('payQR').style.display = isCard ? 'none' : 'block';
+            });
+        });
+
+        function processPayment() {
+            showToast('Payment successful! (Demo)', 'success');
+            closePayModal();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Web3 Monitor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand"><span class="dot"></span> Web3 Monitor</a>
+        <div class="navbar-links"></div>
+        <div class="navbar-actions"><a href="/" class="btn btn-sm btn-secondary">Back to Home</a></div>
+    </nav>
+
+    <div class="auth-page">
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <h2>Track. Translate. Alert.</h2>
+                <p>Real-time Twitter KOL monitoring with Feishu phone call wake-up service.</p>
+                <div class="auth-features">
+                    <div class="auth-feature"><span>&#x2713;</span> 5-min polling interval</div>
+                    <div class="auth-feature"><span>&#x2713;</span> Auto Chinese translation</div>
+                    <div class="auth-feature"><span>&#x2713;</span> Feishu phone call alerts</div>
+                    <div class="auth-feature"><span>&#x2713;</span> Smart retry until read</div>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-form-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Sign In</button>
+                    <button class="auth-tab" data-tab="register">Sign Up</button>
+                </div>
+
+                <!-- Login -->
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" name="password" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Sign In</button>
+                </form>
+
+                <!-- Register -->
+                <form id="registerForm" class="auth-form" style="display:none">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-input" name="username" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" name="password" placeholder="At least 6 characters" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+        // 如已登录直接跳仪表盘
+        if (isLoggedIn()) window.location.href = '/dashboard.html';
+
+        // Tab 切换
+        const tabs = document.querySelectorAll('.auth-tab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        function switchTab(tab) {
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+            loginForm.style.display = tab === 'login' ? 'block' : 'none';
+            registerForm.style.display = tab === 'register' ? 'block' : 'none';
+        }
+
+        tabs.forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+        // URL 参数
+        const params = new URLSearchParams(location.search);
+        if (params.get('tab') === 'register') switchTab('register');
+
+        // 登录
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            try {
+                const res = await api.login({ email: fd.get('email'), password: fd.get('password') });
+                if (res && res.data) {
+                    localStorage.setItem('token', res.data.token);
+                    await loadUser();
+                    window.location.href = '/dashboard.html';
+                }
+            } catch {}
+        });
+
+        // 注册
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            try {
+                const res = await api.register({
+                    username: fd.get('username'), email: fd.get('email'), password: fd.get('password'),
+                });
+                if (res && res.data) {
+                    localStorage.setItem('token', res.data.token);
+                    await loadUser();
+                    window.location.href = '/dashboard.html';
+                }
+            } catch {}
+        });
+    </script>
+</body>
+</html>
